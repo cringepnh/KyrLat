@@ -42,32 +42,38 @@ def normalize_apostrophes(text: str) -> str:
 
 # =============================================================================
 # MAPPING TABLES
+# Official Uzbek Cyrillic ↔ Latin (1995 standard)
 # =============================================================================
+
+# IMPORTANT: Uzbek Cyrillic alphabet does NOT include Ң (eng)!
+# The sound "ng" is written as two letters: Н + Г (нг) in Cyrillic
 
 # Latin → Cyrillic: Multi-character combinations (MUST be processed FIRST)
 LATIN_TO_CYRILLIC_MULTI = [
-    # Uppercase
+    # Uppercase combinations with apostrophe
     ("G\u02BB", "Ғ"),   # Gʻ → Ғ
     ("O\u02BB", "Ў"),   # Oʻ → Ў
+    # Uppercase digraphs
     ("Sh", "Ш"),
     ("Ch", "Ч"),
-    ("Ng", "Ң"),
+    ("Ng", "Нг"),  # ng → нг (two separate Cyrillic letters, NOT ң!)
     ("Yo", "Ё"),
     ("Yu", "Ю"),
     ("Ya", "Я"),
-    # Lowercase
+    # Lowercase combinations with apostrophe
     ("g\u02BB", "ғ"),   # gʻ → ғ
     ("o\u02BB", "ў"),   # oʻ → ў
+    # Lowercase digraphs
     ("sh", "ш"),
     ("ch", "ч"),
-    ("ng", "ң"),
+    ("ng", "нг"),  # ng → нг (two separate Cyrillic letters, NOT ң!)
     ("yo", "ё"),
     ("yu", "ю"),
     ("ya", "я"),
-    # Mixed case variants
+    # All uppercase variants
     ("SH", "Ш"),
     ("CH", "Ч"),
-    ("NG", "Ң"),
+    ("NG", "НГ"),  # NG → НГ
     ("YO", "Ё"),
     ("YU", "Ю"),
     ("YA", "Я"),
@@ -90,22 +96,25 @@ LATIN_TO_CYRILLIC_SINGLE = {
 }
 
 # Cyrillic → Latin mappings
+# Official Uzbek Cyrillic alphabet: А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Ъ Ь Э Ю Я Ў Қ Ғ Ҳ
 CYRILLIC_TO_LATIN = {
     # Uppercase
     'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Ғ': "G\u02BB",  # Ғ → Gʻ
     'Д': 'D', 'Е': 'E', 'Ё': 'Yo', 'Ж': 'J', 'З': 'Z',
     'И': 'I', 'Й': 'Y', 'К': 'K', 'Қ': 'Q', 'Л': 'L',
-    'М': 'M', 'Н': 'N', 'Ң': 'Ng', 'О': 'O', 'Ў': "O\u02BB",  # Ў → Oʻ
+    'М': 'M', 'Н': 'N', 'О': 'O', 'Ў': "O\u02BB",  # Ў → Oʻ
     'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
     'Ф': 'F', 'Х': 'X', 'Ҳ': 'H', 'Ч': 'Ch', 'Ш': 'Sh',
+    'Ъ': "'", 'Ь': '', 'Э': 'E', 'Ц': 'Ts',  # Russian letters sometimes used
     'Ю': 'Yu', 'Я': 'Ya',
     # Lowercase
     'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'ғ': "g\u02BB",  # ғ → gʻ
     'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'j', 'з': 'z',
     'и': 'i', 'й': 'y', 'к': 'k', 'қ': 'q', 'л': 'l',
-    'м': 'm', 'н': 'n', 'ң': 'ng', 'о': 'o', 'ў': "o\u02BB",  # ў → oʻ
+    'м': 'm', 'н': 'n', 'о': 'o', 'ў': "o\u02BB",  # ў → oʻ
     'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
     'ф': 'f', 'х': 'x', 'ҳ': 'h', 'ч': 'ch', 'ш': 'sh',
+    'ъ': "'", 'ь': '', 'э': 'e', 'ц': 'ts',  # Russian letters sometimes used
     'ю': 'yu', 'я': 'ya',
 }
 

@@ -94,7 +94,7 @@ KyrLat uses the **official Uzbek Latin alphabet** (1995 standard) with proper ap
 | K, k  | К, к     | Z, z   | З, з    |
 | L, l  | Л, л     | Sh, sh | Ш, ш    |
 | M, m  | М, м     | Ch, ch | Ч, ч    |
-| N, n  | Н, н     | Ng, ng | Ң, ң    |
+| N, n  | Н, н     | Ng, ng | Нг, нг  |
 | O, o  | О, о     | Yo, yo | Ё, ё    |
 | — | — | Yu, yu | Ю, ю    |
 | — | — | Ya, ya | Я, я    |
