@@ -107,19 +107,30 @@ The app automatically normalizes all apostrophe variants to the standard Uzbek a
 - `ʼ` (modifier letter apostrophe)
 - `'` (right single quotation mark)
 
-### Apostrophe as Separator
+### Apostrophe Usage in Transliteration
 
-In some Uzbek words, the apostrophe is used to separate letters and prevent incorrect digraph conversion:
+The apostrophe has **two different functions** in Uzbek Latin script:
 
-**Examples:**
+#### 1. Part of letters (Gʻ, Oʻ)
+Used to form special letters:
+- `Gʻ, gʻ` → `Ғ, ғ`
+- `Oʻ, oʻ` → `Ў, ў`
+
+**Example:** `oʻzbek` → `ўзбек`
+
+#### 2. Digraph Separator (Is'hoq pattern)
+Prevents incorrect digraph conversion:
 - `Is'hoq` → `Исҳоқ` (not `Ишоқ`) — apostrophe prevents `sh`
-- `As'har` → `Асҳар` (not `Ашар`) — apostrophe prevents `sh`
-- `Mas'h` → `Масҳ` (not `Маш`) — apostrophe prevents `sh`
+- `As'har` → `Асҳар` (not `Ашар`)
+- Works with endings: `Is'hoqjon` → `Исҳоқжон`
 
-This works with any word endings:
-- `Is'hoqjon` → `Исҳоқжон` ✅
+#### 3. Hard Sign - Tutuq belgisi (ra'no pattern)
+Becomes the Cyrillic hard sign (ъ):
+- `ra'no` → `раъно`
+- `ma'no` → `маъно`
+- `ma'lum` → `маълум`
 
-The apostrophe is removed after serving its purpose as a separator.
+The system automatically determines which function based on context.
 
 ---
 

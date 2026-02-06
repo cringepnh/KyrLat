@@ -53,6 +53,13 @@ LATIN_TO_CYRILLIC_MULTI = [
     # Uppercase combinations with apostrophe
     ("G\u02BB", "Ғ"),   # Gʻ → Ғ
     ("O\u02BB", "Ў"),   # Oʻ → Ў
+    # Apostrophe as digraph separator (MUST come BEFORE sh/ch!)
+    # These prevent s'h → ш, instead s'h → сҳ (Is'hoq → Исҳоқ)
+    ("S\u02BBh", "Сҳ"), # S'h → Сҳ (not Ш)
+    ("s\u02BBh", "сҳ"), # s'h → сҳ (not ш)
+    ("S\u02BBH", "СҲ"), # S'H → СҲ
+    ("C\u02BBh", "Чҳ"), # C'h → Чҳ (not Ч) if needed
+    ("c\u02BBh", "чҳ"), # c'h → чҳ (not ч) if needed
     # Uppercase digraphs
     ("Sh", "Ш"),
     ("Ch", "Ч"),
@@ -93,10 +100,9 @@ LATIN_TO_CYRILLIC_SINGLE = {
     'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п',
     'q': 'қ', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
     'v': 'в', 'x': 'х', 'y': 'й', 'z': 'з',
-    # Apostrophe: used as separator in words like Is'hoq, As'har, Mas'h
-    # After oʻ/gʻ digraphs are processed, remaining apostrophes are separators
-    # This prevents s'h → ш (wrong), instead s'h → сҳ (correct)
-    '\u02BB': '',  # Remove standalone apostrophe
+    # Apostrophe → Hard sign (ъ) for words like ra'no → раъно, ma'no → маъно
+    # Note: s'h is handled separately in MULTI to prevent → ш (becomes сҳ)
+    '\u02BB': 'ъ',  # Tutuq belgisi → ъ (hard sign)
 }
 
 # Cyrillic → Latin mappings
