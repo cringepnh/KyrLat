@@ -107,6 +107,20 @@ The app automatically normalizes all apostrophe variants to the standard Uzbek a
 - `ʼ` (modifier letter apostrophe)
 - `'` (right single quotation mark)
 
+### Apostrophe as Separator
+
+In some Uzbek words, the apostrophe is used to separate letters and prevent incorrect digraph conversion:
+
+**Examples:**
+- `Is'hoq` → `Исҳоқ` (not `Ишоқ`) — apostrophe prevents `sh`
+- `As'har` → `Асҳар` (not `Ашар`) — apostrophe prevents `sh`
+- `Mas'h` → `Масҳ` (not `Маш`) — apostrophe prevents `sh`
+
+This works with any word endings:
+- `Is'hoqjon` → `Исҳоқжон` ✅
+
+The apostrophe is removed after serving its purpose as a separator.
+
 ---
 
 ## 🛠️ Technical Details

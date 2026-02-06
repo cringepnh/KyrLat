@@ -93,6 +93,10 @@ LATIN_TO_CYRILLIC_SINGLE = {
     'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п',
     'q': 'қ', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
     'v': 'в', 'x': 'х', 'y': 'й', 'z': 'з',
+    # Apostrophe: used as separator in words like Is'hoq, As'har, Mas'h
+    # After oʻ/gʻ digraphs are processed, remaining apostrophes are separators
+    # This prevents s'h → ш (wrong), instead s'h → сҳ (correct)
+    '\u02BB': '',  # Remove standalone apostrophe
 }
 
 # Cyrillic → Latin mappings
