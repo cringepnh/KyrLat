@@ -409,6 +409,53 @@ class TransliteratorApp:
         """Set up live transliteration on input changes."""
         self.input_text.bind("<KeyRelease>", lambda e: self.on_input_change())
         self.input_text.bind("<ButtonRelease>", lambda e: self.on_input_change())
+        
+        # Handle all keyboard shortcuts via keycode (works on any layout)
+        def on_key_press(event):
+            # Check if Control is pressed
+            if event.state & 0x4:  # Control key modifier
+                # keycode 65 = 'A' key, keycode 86 = 'V' key, keycode 67 = 'C' key, keycode 88 = 'X' key
+                if event.keycode == 65:  # Ctrl+A
+                    # Select all text (excluding trailing newline)
+                    self.input_text.tag_add(tk.SEL, "1.0", "end-1c")
+                    self.input_text.mark_set(tk.INSERT, "end-1c")
+                    self.input_text.see(tk.INSERT)
+                    return 'break'
+                    
+                elif event.keycode == 67:  # Ctrl+C
+                    try:
+                        text = self.input_text.get(tk.SEL_FIRST, tk.SEL_LAST)
+                        self.root.clipboard_clear()
+                        self.root.clipboard_append(text)
+                    except tk.TclError:
+                        pass  # No selection
+                    return 'break'
+                    
+                elif event.keycode == 86:  # Ctrl+V
+                    try:
+                        text = self.root.clipboard_get()
+                        try:
+                            self.input_text.delete(tk.SEL_FIRST, tk.SEL_LAST)
+                        except tk.TclError:
+                            pass
+                        self.input_text.insert(tk.INSERT, text)
+                        self.root.after(10, self.on_input_change)
+                    except tk.TclError:
+                        pass  # Empty clipboard
+                    return 'break'
+                    
+                elif event.keycode == 88:  # Ctrl+X
+                    try:
+                        text = self.input_text.get(tk.SEL_FIRST, tk.SEL_LAST)
+                        self.root.clipboard_clear()
+                        self.root.clipboard_append(text)
+                        self.input_text.delete(tk.SEL_FIRST, tk.SEL_LAST)
+                        self.root.after(10, self.on_input_change)
+                    except tk.TclError:
+                        pass  # No selection
+                    return 'break'
+        
+        self.input_text.bind("<KeyPress>", on_key_press)
     
     def detect_language(self, text: str) -> str:
         """Detect whether text is mostly Cyrillic or Latin."""
